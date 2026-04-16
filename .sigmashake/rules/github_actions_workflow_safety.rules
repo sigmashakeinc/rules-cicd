@@ -17,8 +17,7 @@ rule warn-gh-actions-unpinned-version {
   AND content REGEX "uses: [a-zA-Z0-9\-]+\/[a-zA-Z0-9\-]+@(main|master|v[0-9]+)$"
   severity warning
   priority 90
-  ASK write
-  PROMPT "Pin your action to a specific commit SHA for better supply chain security. Proceed?"
+  LOG write
 }
 
 rule block-gh-actions-pull-request-target {
@@ -38,6 +37,5 @@ rule audit-gh-actions-external-curl {
   AND (content CONTAINS "| bash" OR content CONTAINS "| sh")
   severity warning
   priority 95
-  ASK write
-  PROMPT "Are you sure you want to execute an external script in your CI environment?"
+  LOG write
 }
